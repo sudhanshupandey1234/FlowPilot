@@ -143,12 +143,6 @@ section { scroll-margin-top: 84px; }
 }
 .btn-ghost:hover { border-color: var(--ink); background: #fff; }
 
-.btn-light {
-  background: #fff;
-  color: var(--ink);
-}
-.btn-light:hover { background: var(--lime-soft); }
-
 /* ---------- Navbar ---------- */
 .navbar {
   position: sticky;
@@ -420,7 +414,6 @@ section { scroll-margin-top: 84px; }
   flex: none;
 }
 .av-lime { background: #65a30d; }
-.av-blue { background: #2563eb; }
 .av-amber { background: #d97706; }
 .av-plum { background: #7c3aed; }
 .av-teal { background: #0d9488; }
@@ -604,9 +597,10 @@ section { scroll-margin-top: 84px; }
   min-width: 0;
 }
 
-/* mini board */
-.mini-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.mini-col { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px; }
+/* mini board — minmax(0, 1fr) so long labels can't force the tracks
+   wider than the visual (tablet squeeze zone) */
+.mini-board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.mini-col { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px; min-width: 0; }
 .mini-col h5 { margin: 0 0 8px; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; }
 .mini-card {
   background: #fff; border: 1px solid var(--line); border-radius: 8px;
@@ -752,6 +746,8 @@ section { scroll-margin-top: 84px; }
   background: var(--lime); color: var(--ink);
   border-radius: 999px; padding: 3px 9px;
 }
+.billing-opt { color: var(--muted); font-weight: 600; transition: color 0.15s ease; }
+.billing-opt.active { color: var(--ink); }
 .switch {
   position: relative; width: 54px; height: 30px; flex: none;
   background: var(--ink); border: none; border-radius: 999px; padding: 0;
@@ -921,7 +917,9 @@ section { scroll-margin-top: 84px; }
 @media (max-width: 1020px) {
   .overview-grid, .faq-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
   .overview-sticky { position: static; }
-  .feature-row { gap: 36px; }
+  .feature-row { grid-template-columns: 1fr; gap: 36px; padding: 48px 0; }
+  .feature-row.flip .feature-copy { order: 1; }
+  .feature-row.flip .feature-visual { order: 2; }
   .showcase-panel { grid-template-columns: 1fr; gap: 28px; }
   .plans { grid-template-columns: 1fr; max-width: 520px; margin-inline: auto; }
   .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }

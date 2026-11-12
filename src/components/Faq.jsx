@@ -39,8 +39,8 @@ export default function Faq() {
           <h2 id="faq-heading">Questions, answered plainly.</h2>
           <p>
             The things teams usually ask before they start. Something else on
-            your mind? Use the contact form below — a real person reads every
-            message.
+            your mind? The contact form below is a front-end demo — it
+            validates your message locally but doesn&rsquo;t send it anywhere.
           </p>
         </div>
 

@@ -53,8 +53,8 @@ export default function HowItWorks() {
 
         <div className="how-cta">
           <p>
-            <strong>Start with the Free plan.</strong> One project, your whole
-            team, no card required.
+            <strong>Start with the Free plan.</strong> Up to 3 projects, your
+            whole team, no card required.
           </p>
           <a className="btn btn-lime" href="#contact">
             Get started <ArrowRight aria-hidden="true" />

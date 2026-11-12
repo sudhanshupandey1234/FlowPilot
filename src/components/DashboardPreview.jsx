@@ -74,16 +74,16 @@ export default function DashboardPreview() {
               </span>
               FlowPilot
             </div>
-            <a className="side-item active"><LayoutDashboard /> Dashboard</a>
-            <a className="side-item"><FolderKanban /> Projects</a>
-            <a className="side-item"><CheckSquare /> My tasks <span className="count">6</span></a>
-            <a className="side-item"><CalendarDays /> Calendar</a>
-            <a className="side-item"><BarChart3 /> Reports</a>
+            <span className="side-item active"><LayoutDashboard /> Dashboard</span>
+            <span className="side-item"><FolderKanban /> Projects</span>
+            <span className="side-item"><CheckSquare /> My tasks <span className="count">6</span></span>
+            <span className="side-item"><CalendarDays /> Calendar</span>
+            <span className="side-item"><BarChart3 /> Reports</span>
             <div className="side-label">Projects</div>
             <div className="side-project"><i style={{ background: "#9be515" }} /> Website relaunch</div>
             <div className="side-project"><i style={{ background: "#60a5fa" }} /> Mobile app</div>
             <div className="side-project"><i style={{ background: "#f59e0b" }} /> Growth</div>
-            <a className="side-item"><Settings /> Settings</a>
+            <span className="side-item"><Settings /> Settings</span>
             <div className="side-user">
               <span className="avatar av-lime">SK</span>
               <span>Sara Khan<small>Product lead</small></span>

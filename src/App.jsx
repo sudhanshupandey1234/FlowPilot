@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Overview from "./components/Overview";
@@ -35,6 +36,39 @@ function CapabilityStrip() {
 }
 
 export default function App() {
+  // Restrained scroll-reveal: each main section fades in once when it
+  // enters the viewport. A safety timeout reveals everything in case
+  // IntersectionObserver never fires; reduced-motion users (see CSS)
+  // never get the hidden state at all.
+  useEffect(() => {
+    const sections = Array.from(document.querySelectorAll("#main > section"));
+    sections.forEach((el) => el.classList.add("reveal"));
+    if (!("IntersectionObserver" in window)) {
+      sections.forEach((el) => el.classList.add("visible"));
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.08 }
+    );
+    sections.forEach((el) => io.observe(el));
+    const safety = setTimeout(
+      () => sections.forEach((el) => el.classList.add("visible")),
+      1500
+    );
+    return () => {
+      io.disconnect();
+      clearTimeout(safety);
+    };
+  }, []);
+
   return (
     <>
       <a className="skip-link" href="#main">

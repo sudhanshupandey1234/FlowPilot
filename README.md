@@ -1,5 +1,8 @@
 # FlowPilot — Less chaos. More momentum.
 
+**Live website:** https://sudhanshupandey1234.github.io/FlowPilot/
+**Repository:** https://github.com/sudhanshupandey1234/FlowPilot
+
 FlowPilot is a premium SaaS landing website for a fictional productivity
 platform that helps teams manage projects, organise tasks, collaborate and
 track performance from one workspace.
@@ -10,8 +13,9 @@ contact details are illustrative and labelled as such on the site.
 
 ## Features
 
-- **Sticky navigation** with mobile hamburger menu and an honest
-  "sign-in is not available in this demo" notice instead of fake auth.
+- **Sticky navigation** with mobile hamburger menu (closes with Escape
+  or on resize to desktop) and an honest "sign-in is not available in
+  this demo" notice instead of fake auth.
 - **Hero with a realistic product dashboard** built entirely in HTML/CSS —
   sidebar, project KPIs, task list, progress bar and team activity feed.
 - **Product overview** in an editorial split layout explaining the problem
@@ -20,12 +24,14 @@ contact details are illustrative and labelled as such on the site.
   ranked priority list, comment thread, progress bars, Gantt timeline and
   insight rows with sparklines.
 - **How It Works** — a clean three-step process on a dark navy section.
-- **Product showcase** with working Board / Timeline / Insights tabs.
+- **Product showcase** with working Board / Timeline / Insights tabs —
+  full ARIA tabs pattern with arrow-key navigation.
 - **Pricing** — Free / Pro / Team with a working monthly–yearly toggle
   (yearly saves ~17%, labelled as proposed demo pricing).
 - **FAQ accordion** — six realistic questions, keyboard accessible.
-- **Contact / Get Started form** with frontend validation, inline errors
-  and a success state. Honest note: submissions are not sent anywhere.
+- **Contact / Get Started form** with frontend validation, inline errors,
+  focus moved to the first invalid field, and a success state. Honest
+  note: submissions are not sent anywhere or stored.
 - **Footer** with a clearly labelled demo email (`hello@flowpilot.demo`).
   No invented social links.
 
@@ -47,10 +53,11 @@ flowpilot/
 ├── package.json
 ├── vite.config.js
 ├── public/
-│   └── favicon.svg
+│   ├── favicon.svg
+│   └── .nojekyll            # Keeps GitHub Pages from running Jekyll
 └── src/
     ├── main.jsx               # React entry point
-    ├── App.jsx                # Page composition
+    ├── App.jsx                # Page composition + scroll-reveal wiring
     ├── index.css              # Full design system (~1,000 lines)
     └── components/
         ├── Navbar.jsx         # Sticky nav, mobile menu, sign-in notice
@@ -107,11 +114,14 @@ npm run preview   # serves the production build locally for a final check
   as illustrative. Pricing is labelled as proposed/demo pricing, the form
   says it sends nothing, and sign-in says it is unavailable.
 - **Accessibility:** semantic landmarks, skip link, labelled form fields
-  with `aria-invalid`/`aria-describedby`, `aria-expanded` on the menu and
-  accordion, `role="switch"` on the billing toggle, focus-visible outlines,
-  and `prefers-reduced-motion` support.
+  with `aria-invalid`/`aria-describedby` and focus to the first error on
+  submit, `aria-expanded` on the menu and accordion, `role="switch"` on
+  the billing toggle, ARIA tabs pattern (roving tabindex + arrow keys) in
+  the showcase, Escape/resize handling for the mobile menu, focus-visible
+  outlines, restrained scroll-reveal animation, and
+  `prefers-reduced-motion` support.
 
-## Known limitations
+## Demo limitations and disclaimers
 
 - Demo only: no backend, authentication, payments, or data persistence.
   The contact form validates locally and stores nothing.

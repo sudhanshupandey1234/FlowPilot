@@ -19,6 +19,24 @@ export default function Navbar() {
     return () => clearTimeout(t);
   }, [notice]);
 
+  // Close the mobile menu with Escape, and when the viewport grows
+  // back to the desktop layout (so it can't stay stuck open).
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    const onResize = () => {
+      if (window.innerWidth > 860) setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("resize", onResize);
+    };
+  }, [open]);
+
   return (
     <>
       <header className="navbar">

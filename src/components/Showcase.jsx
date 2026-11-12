@@ -38,6 +38,19 @@ export default function Showcase() {
   const [active, setActive] = useState("board");
   const tab = TABS.find((t) => t.id === active);
 
+  // Roving tabindex + arrow-key navigation, per the ARIA tabs pattern.
+  const onTabKeyDown = (e, idx) => {
+    let next = null;
+    if (e.key === "ArrowRight") next = (idx + 1) % TABS.length;
+    else if (e.key === "ArrowLeft") next = (idx - 1 + TABS.length) % TABS.length;
+    else if (e.key === "Home") next = 0;
+    else if (e.key === "End") next = TABS.length - 1;
+    if (next === null) return;
+    e.preventDefault();
+    setActive(TABS[next].id);
+    document.getElementById(`showcase-tab-${TABS[next].id}`)?.focus();
+  };
+
   return (
     <section className="showcase" id="showcase" aria-labelledby="showcase-heading">
       <div className="wrap">
@@ -52,20 +65,29 @@ export default function Showcase() {
         </div>
 
         <div className="showcase-tabs" role="tablist" aria-label="Product views">
-          {TABS.map((t) => (
+          {TABS.map((t, idx) => (
             <button
               key={t.id}
               type="button"
               role="tab"
+              id={`showcase-tab-${t.id}`}
               aria-selected={active === t.id}
+              aria-controls="showcase-panel"
+              tabIndex={active === t.id ? 0 : -1}
               onClick={() => setActive(t.id)}
+              onKeyDown={(e) => onTabKeyDown(e, idx)}
             >
               <t.icon aria-hidden="true" /> {t.label}
             </button>
           ))}
         </div>
 
-        <div className="showcase-panel" role="tabpanel" aria-label={tab.label}>
+        <div
+          className="showcase-panel"
+          role="tabpanel"
+          id="showcase-panel"
+          aria-labelledby={`showcase-tab-${tab.id}`}
+        >
           <div>
             <h3>{tab.title}</h3>
             <p>{tab.body}</p>

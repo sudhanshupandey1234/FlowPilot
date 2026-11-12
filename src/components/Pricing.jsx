@@ -63,18 +63,18 @@ export default function Pricing() {
             with a 14-day trial — no card required.
           </p>
           <div className="billing-toggle">
-            <span id="billing-label">Monthly</span>
+            <span id="billing-label-monthly" className={`billing-opt${!yearly ? " active" : ""}`}>Monthly</span>
             <button
               type="button"
               role="switch"
               aria-checked={yearly}
-              aria-labelledby="billing-label"
+              aria-label="Yearly billing"
               className="switch"
               onClick={() => setYearly((v) => !v)}
             >
               <span className="knob" aria-hidden="true" />
             </button>
-            <span>Yearly <span className="save">Save ~17% — 2 months free</span></span>
+            <span className={`billing-opt${yearly ? " active" : ""}`}>Yearly <span className="save">Save ~17% — 2 months free</span></span>
           </div>
         </div>
 

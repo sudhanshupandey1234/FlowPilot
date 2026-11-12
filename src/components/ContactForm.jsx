@@ -37,7 +37,20 @@ export default function ContactForm() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (validate()) setSubmitted(true);
+    if (validate()) {
+      setSubmitted(true);
+      return;
+    }
+    // Move keyboard focus to the first field with an error.
+    const firstError = ["name", "email", "message"].find(
+      (f) =>
+        (f === "name" && values.name.trim().length < 2) ||
+        (f === "email" && !EMAIL_RE.test(values.email.trim())) ||
+        (f === "message" && values.message.trim().length < 10)
+    );
+    document
+      .getElementById({ name: "cf-name", email: "cf-email", message: "cf-message" }[firstError])
+      ?.focus();
   };
 
   const reset = () => {
@@ -54,9 +67,10 @@ export default function ContactForm() {
             <span className="kicker">Get started</span>
             <h2 id="contact-heading">Start your first project today.</h2>
             <p>
-              Tell us about your team and what you&rsquo;re working on. We&rsquo;ll
-              get back to you with a workspace and a short plan to get started —
-              usually within one business day.
+              Tell us about your team and what you&rsquo;re working on. This
+              is a front-end demo, so the form doesn&rsquo;t send or store
+              anything — but the fields below show exactly what a request
+              would collect.
             </p>
           </div>
           <ul className="contact-points">
@@ -78,8 +92,8 @@ export default function ContactForm() {
             <li>
               <Clock aria-hidden="true" />
               <div>
-                <strong>When we reply</strong>
-                <span>Within one business day, Monday to Friday.</span>
+                <strong>In the live product</strong>
+                <span>Replies within one business day, Monday to Friday — this demo sends nothing.</span>
               </div>
             </li>
           </ul>
@@ -91,9 +105,9 @@ export default function ContactForm() {
               <div className="ok-badge"><CheckCircle2 aria-hidden="true" /></div>
               <h3>Thanks, {values.name.trim().split(" ")[0]} — request received.</h3>
               <p>
-                Your message has been recorded in this demo. In the live
-                product it would be sent to the FlowPilot team; here, nothing
-                leaves your browser.
+                This is a demo, so your message wasn&rsquo;t sent or stored
+                anywhere — nothing leaves your browser. In the live product
+                it would be sent to the FlowPilot team.
               </p>
               <button type="button" className="btn btn-ghost" onClick={reset}>
                 <RotateCcw aria-hidden="true" /> Send another message
