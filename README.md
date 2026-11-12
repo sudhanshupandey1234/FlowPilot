@@ -125,14 +125,16 @@ npm run preview   # serves the production build locally for a final check
 
 The production output is a static site (`dist/` after `npm run build`).
 
-- **GitHub Pages (live):** deployed automatically by
-  `.github/workflows/deploy.yml` on every push to `main` — build with
-  `npm ci` + `npm run build`, then publish `dist/` via the
-  `deploy-pages` action. One-time setup: repo Settings → Pages → Build
-  and deployment → Source: **GitHub Actions**. Live URL:
+- **GitHub Pages (live):** the built site lives on the `gh-pages` branch
+  (built with `npm run build` from `main`, Vite `base` set to
+  `/FlowPilot/`). One-time setup: repo Settings → Pages → Build and
+  deployment → Source: **Deploy from a branch** → branch `gh-pages`,
+  folder `/ (root)`. Live URL:
   https://sudhanshupandey1234.github.io/FlowPilot/
-  (Vite `base` is set to `/FlowPilot/` so assets resolve under the
-  project-page path.)
+  (Note: pushing `.github/workflows/*.yml` files needs a token/App with
+  the `workflows` permission, which the connected GitHub App does not
+  have — so deploys use the `gh-pages` branch instead of an Actions
+  workflow. Rebuild + push `dist/` to `gh-pages` after each change.)
 - **Vercel:** import the repository, framework preset "Vite", build command
   `npm run build`, output directory `dist`.
 - **Netlify:** same settings, or drag the `dist/` folder onto Netlify Drop.
